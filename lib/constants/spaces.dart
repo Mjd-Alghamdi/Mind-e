@@ -8,6 +8,7 @@ const kV12 = SizedBox(height: 12);
 const kV16 = SizedBox(height: 16);
 const kV24 = SizedBox(height: 24);
 const kV32 = SizedBox(height: 32);
+const kV42 = SizedBox(height: 42);
 const kV64 = SizedBox(height: 64);
 const kV124 = SizedBox(height: 124);
 
