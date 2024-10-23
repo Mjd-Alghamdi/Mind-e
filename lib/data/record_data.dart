@@ -16,7 +16,6 @@ class RecordData {
     // -- Adding the entered feeling into the list
     feelingRecordList.add(
       RecordModel(
-        id: 1, // TODO: Change this later "it will be generated randomly"
         content: feelingContent,
         emotionType: emotion,
       ),

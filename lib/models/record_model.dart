@@ -1,8 +1,16 @@
+import 'package:flutter/material.dart';
+
 class RecordModel {
-  final int id;
+  late UniqueKey id;
   final String content;
   final String emotionType;
 
-  RecordModel(
-      {required this.id, required this.content, required this.emotionType});
+  RecordModel({
+    required this.content,
+    required this.emotionType,
+  }) {
+    // -- Random id
+    // TODO: Change this later "it will be generated randomly"
+    id = UniqueKey();
+  }
 }
