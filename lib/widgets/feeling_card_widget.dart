@@ -13,7 +13,7 @@ class FeelingCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      margin: EdgeIgit snsets.symmetric(vertical: 8),
+      margin: EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 15,
