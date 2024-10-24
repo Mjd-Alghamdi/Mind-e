@@ -3,7 +3,10 @@ import 'package:mind_e/models/record_model.dart';
 
 class RecordData {
   // * The list of all registered feeling
-  List<RecordModel> feelingRecordList = [];
+  List<RecordModel> feelingRecordList = [
+    RecordModel(content: "first", emotionType: 'Happy'),
+    RecordModel(content: "ddd", emotionType: 'Sad'),
+  ];
 
   // The most feeling
   String mostFeeling = "";
@@ -25,8 +28,19 @@ class RecordData {
   // -- Remove existing feeling record
   void removeFeelingRecord({required RecordModel record}) {
     // -- Remove the entered feeling into the list
-    feelingRecordList
-        .removeWhere((feelingRecord) => feelingRecord.id == record.id);
+    print("Key from function ${record.id}");
+    // feelingRecordList.removeWhere(
+    //   (feelingRecord) {
+    //     print(feelingRecord.content == record.content);
+    //     // ! There is a problem with the id even if it is matched it did'n deleted
+    //     // return feelingRecord.id == record.id;
+    //     return feelingRecord.content == record.content; // ! just for test
+    //   },
+    // );
+    feelingRecordList.removeWhere(
+      (feelingRecord) => feelingRecord.id == record.id,
+    );
+    print(feelingRecordList);
   }
 
   // -- Detect the most feeling from the list

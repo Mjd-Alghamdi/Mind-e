@@ -4,6 +4,7 @@ class RecordModel {
   late UniqueKey id;
   final String content;
   final String emotionType;
+  late DateTime crateAt;
 
   RecordModel({
     required this.content,
@@ -12,5 +13,6 @@ class RecordModel {
     // -- Random id
     // TODO: Change this later "it will be generated randomly"
     id = UniqueKey();
+    crateAt = DateTime.now();
   }
 }

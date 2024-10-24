@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_e/bloc/feeling_record_bloc.dart';
 import 'package:mind_e/constants/color.dart';
 import 'package:mind_e/constants/spaces.dart';
+import 'package:mind_e/models/record_model.dart';
 import 'package:mind_e/widgets/buttons/custom_button.dart';
 import 'package:mind_e/widgets/small_card_info_widget.dart';
 
 class ViewFeelingPopupWidget extends StatelessWidget {
-  const ViewFeelingPopupWidget({super.key});
+  const ViewFeelingPopupWidget({super.key, required this.feelingRecord});
+
+  final RecordModel feelingRecord;
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<FeelingRecordBloc>();
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
@@ -20,7 +26,6 @@ class ViewFeelingPopupWidget extends StatelessWidget {
             color: whiteColor,
             borderRadius: BorderRadius.circular(5),
           ),
-          // ignore: prefer_const_constructors
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -33,8 +38,8 @@ class ViewFeelingPopupWidget extends StatelessWidget {
                         "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}",
                     color: lightTiffanyColor,
                   ),
-                  const SmallCardInfoWidget(
-                    content: "Happy",
+                  SmallCardInfoWidget(
+                    content: feelingRecord.emotionType,
                     color: limColor,
                   ),
                 ],
@@ -49,10 +54,10 @@ class ViewFeelingPopupWidget extends StatelessWidget {
                 ),
               ),
               kV16,
-              const Expanded(
+              Expanded(
                 child: SingleChildScrollView(
                   child: Text(
-                    "Yes i saw your answer and i tried that as well, again i am not getting the circle shape. Even the link which you shared doesn't change into circle shape Even the link which you shared doesn't change into circle shapeEven the link which you shared doesn't change into circle shapeEven the link which you shared doesn't change into circle shapeEven the link which you shared doesn't change into circle shapeEven ",
+                    feelingRecord.content,
                   ),
                 ),
               ),
@@ -61,6 +66,8 @@ class ViewFeelingPopupWidget extends StatelessWidget {
                 onTap: () {
                   //-- Delete the feeling to the list
                   // -- Pop up the view
+                  bloc.add(RemoveFeelingRecordEvent(feelingRecord));
+                  Navigator.pop(context);
                 },
                 borderWidth: 1,
                 buttonColor: whiteColor,

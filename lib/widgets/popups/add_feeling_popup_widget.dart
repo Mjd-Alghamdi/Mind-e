@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_e/bloc/feeling_record_bloc.dart';
 import 'package:mind_e/constants/color.dart';
 import 'package:mind_e/constants/spaces.dart';
 import 'package:mind_e/widgets/buttons/custom_button.dart';
@@ -19,6 +21,7 @@ class _AddFeelingPopupWidgetState extends State<AddFeelingPopupWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<FeelingRecordBloc>();
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
@@ -62,8 +65,13 @@ class _AddFeelingPopupWidgetState extends State<AddFeelingPopupWidget> {
                 onTap: () {
                   //-- Add the feeling to the list
                   // ! Must to be filed, so no empty submission
+                  bloc.add(AddNewFeelingEvent(
+                    content: feelingContentController.text,
+                    emotionType: 'sad',
+                  ));
 
                   // -- Pop up the view
+                  Navigator.pop(context);
                 },
                 buttonTitle: 'Welcome it',
               ),

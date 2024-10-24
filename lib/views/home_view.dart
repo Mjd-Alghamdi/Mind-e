@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_e/bloc/feeling_record_bloc.dart';
 import 'package:mind_e/constants/color.dart';
 import 'package:mind_e/constants/spaces.dart';
 import 'package:mind_e/widgets/custom_appbar_widget.dart';
+import 'package:mind_e/widgets/custom_placeholder.dart';
 import 'package:mind_e/widgets/feeling_card_widget.dart';
 import 'package:mind_e/widgets/filter_widget.dart';
 import 'package:mind_e/widgets/floating_action_button_widget.dart';
@@ -13,7 +16,11 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
+    // Reading the bloc as a short cut to easy use
+    final bloc = context.read<FeelingRecordBloc>();
+
+    // Adding the fetching list function initially
+    bloc.add(DisplayFeelingListEvent());
     return Scaffold(
       backgroundColor: lightLimColor,
       body: Padding(
@@ -32,11 +39,26 @@ class HomeView extends StatelessWidget {
             const FilterWidget(),
             kV24,
             Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                padding: EdgeInsets.zero,
-                itemBuilder: (BuildContext context, int index) {
-                  return const FeelingCardWidget();
+              child: BlocBuilder<FeelingRecordBloc, FeelingRecordState>(
+                builder: (context, state) {
+                  if (state is ShowFeelingListState) {
+                    return state.recordList.isEmpty
+                        ? const CustomPlaceholder()
+                        : ListView.builder(
+                            itemCount: state.recordList.length,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (BuildContext context, int index) {
+                              return FeelingCardWidget(
+                                feelingRecord: state.recordList[index],
+                              );
+                            },
+                          );
+                  } else {
+                    return Container(
+                      color: lightLimColor,
+                      child: const Text("Something went wrong!"),
+                    );
+                  }
                 },
               ),
             ),

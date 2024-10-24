@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_e/constants/color.dart';
 import 'package:mind_e/constants/spaces.dart';
+import 'package:mind_e/models/record_model.dart';
 import 'package:mind_e/widgets/popups/view_feeling_popup_widget.dart';
 
 import 'small_card_info_widget.dart';
@@ -8,8 +9,10 @@ import 'small_card_info_widget.dart';
 class FeelingCardWidget extends StatelessWidget {
   const FeelingCardWidget({
     super.key,
+    required this.feelingRecord,
   });
 
+  final RecordModel feelingRecord;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -17,7 +20,9 @@ class FeelingCardWidget extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) {
-            return const ViewFeelingPopupWidget();
+            return ViewFeelingPopupWidget(
+              feelingRecord: feelingRecord,
+            );
           },
         );
       },
@@ -45,10 +50,10 @@ class FeelingCardWidget extends StatelessWidget {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.7,
-              child: const Text(
+              child: Text(
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                "Yes i saw your answer and i tried that as well, again i am not getting the circle shape. Even the link which you shared doesn't change into circle shape",
+                feelingRecord.content,
               ),
             ),
             kV16,
@@ -56,12 +61,12 @@ class FeelingCardWidget extends StatelessWidget {
               children: [
                 SmallCardInfoWidget(
                   content:
-                      "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}",
+                      "${feelingRecord.crateAt.day} - ${feelingRecord.crateAt.month} - ${feelingRecord.crateAt.year}",
                   color: lightTiffanyColor,
                 ),
                 kH12,
-                const SmallCardInfoWidget(
-                  content: "Happy",
+                SmallCardInfoWidget(
+                  content: feelingRecord.emotionType,
                   color: limColor,
                 ),
               ],
