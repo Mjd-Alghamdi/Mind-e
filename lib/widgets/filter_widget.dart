@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'emotion_option_widget.dart';
+import 'emotion_option_filter_widget.dart';
 
 class FilterWidget extends StatelessWidget {
   const FilterWidget({

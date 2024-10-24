@@ -6,6 +6,7 @@ import 'package:mind_e/widgets/feeling_card_widget.dart';
 import 'package:mind_e/widgets/filter_widget.dart';
 import 'package:mind_e/widgets/floating_action_button_widget.dart';
 import 'package:mind_e/widgets/for_you_widget.dart';
+import 'package:mind_e/widgets/popups/add_feeling_popup_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -16,7 +17,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: lightLimColor,
       body: Padding(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           left: 30.0,
           right: 30.0,
           top: 100,
@@ -24,11 +25,11 @@ class HomeView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomAppBarWidget(),
+            const CustomAppBarWidget(),
             kV42,
-            ForYouWidget(),
+            const ForYouWidget(),
             kV42,
-            FilterWidget(),
+            const FilterWidget(),
             kV24,
             Expanded(
               child: ListView.builder(
@@ -43,7 +44,14 @@ class HomeView extends StatelessWidget {
         ),
       ),
       floatingActionButton: InkWell(
-        onTap: () {},
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return const AddFeelingPopupWidget();
+            },
+          );
+        },
         child: const FloatingActionButtonWidget(),
       ),
     );
