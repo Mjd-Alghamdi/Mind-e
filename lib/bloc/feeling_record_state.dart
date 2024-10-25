@@ -10,3 +10,10 @@ class ShowFeelingListState extends FeelingRecordState {
   List<RecordModel> recordList;
   ShowFeelingListState({required this.recordList});
 }
+
+// --- Emotion Selection
+// ignore: must_be_immutable
+class UpdateSelectedEmotionState extends FeelingRecordState {
+  bool isEmotionSelected;
+  UpdateSelectedEmotionState({required this.isEmotionSelected});
+}

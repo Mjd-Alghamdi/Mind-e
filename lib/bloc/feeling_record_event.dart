@@ -22,3 +22,12 @@ class RemoveFeelingRecordEvent extends FeelingRecordEvent {
   RecordModel record;
   RemoveFeelingRecordEvent(this.record);
 }
+
+//--- Emotions Events
+
+//-- Selecting emotion event 
+// ignore: must_be_immutable
+class SelectEmotionEvent extends FeelingRecordEvent {
+  String emotionType;
+  SelectEmotionEvent(this.emotionType);
+}

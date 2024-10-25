@@ -2,6 +2,28 @@ class EmotionsData {
   // -- List of main emotions
   List<String> emotionsList = ["Happy", "Calm", "Anxious", "Sad"];
 
+  //-- Which emotion selected ?
+  Map selectedEmotion = {
+    "Happy": false,
+    "Calm": false,
+    "Anxious": false,
+    "Sad": false,
+  };
+
+  void updateSelectedEmotion({required String selection}) {
+    print("Entereddddddd");
+    selectedEmotion.keys.forEach((emotion) {
+      if (selection == emotion) {
+        selectedEmotion[emotion] = true;
+     
+      }
+      else{
+          selectedEmotion[emotion] = false;
+      }
+    });
+    print(selectedEmotion);
+  }
+
   // Awareness note
   String happyNote =
       "It seems like you've been feeling happy a lot lately! Keep enjoying the positive moment.";
