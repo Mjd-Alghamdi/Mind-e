@@ -16,18 +16,33 @@ class EmotionCategoryWidget extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(emotion.length, (index) {
-            return SelectionWidget(
-              content: emotion[index],
-              color: whiteColor,
-              borderColor: emotion[index] == "Happy"
-                  ? lightPinkColor
-                  : emotion[index] == "Calm"
-                      ? tiffanyColor
-                      : emotion[index] == "Sad"
-                          ? greyColor
-                          : Colors.green,
-              borderWidth: 1,
-            );
+            if (state is UpdateSelectedEmotionState) {
+              return SelectionWidget(
+                content: emotion[index],
+                color: whiteColor,
+                borderColor: emotion[index] == "Happy"
+                    ? lightPinkColor
+                    : emotion[index] == "Calm"
+                        ? tiffanyColor
+                        : emotion[index] == "Sad"
+                            ? greyColor
+                            : Colors.green,
+                borderWidth: 1,
+              );
+            } else {
+              return SelectionWidget(
+                content: emotion[index],
+                color: whiteColor,
+                borderColor: emotion[index] == "Happy"
+                    ? lightPinkColor
+                    : emotion[index] == "Calm"
+                        ? tiffanyColor
+                        : emotion[index] == "Sad"
+                            ? greyColor
+                            : Colors.green,
+                borderWidth: 1,
+              );
+            }
           }),
         );
       },

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_e/bloc/feeling_record_bloc.dart';
 import 'package:mind_e/constants/color.dart';
 
 class ForYouWidget extends StatelessWidget {
@@ -6,6 +8,7 @@ class ForYouWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<FeelingRecordBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,21 +28,30 @@ class ForYouWidget extends StatelessWidget {
             style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
           ),
         ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.all(30),
-          decoration: const BoxDecoration(
-            color: whiteColor,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
-            ),
-          ),
-          child: const Text(
-            "Happy mind, Happy life :)",
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-          ),
+        BlocBuilder<FeelingRecordBloc, FeelingRecordState>(
+          builder: (context, state) {
+            if (state is ShowFeelingListState) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.all(30),
+                decoration: const BoxDecoration(
+                  color: whiteColor,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  bloc.recordData.mostFeeling,
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.w600),
+                ),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
         ),
       ],
     );

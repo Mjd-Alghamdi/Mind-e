@@ -24,3 +24,4 @@ class ErrorState extends FeelingRecordState {
   String errorMsg;
   ErrorState(this.errorMsg);
 }
+

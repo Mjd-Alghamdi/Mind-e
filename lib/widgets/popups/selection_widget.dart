@@ -18,46 +18,29 @@ class SelectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<FeelingRecordBloc>();
-    return InkWell(
-      onTap: () {
-        // TODO: this is will handel the selection data
-        bloc.add(SelectEmotionEvent(content));
+    return BlocBuilder<FeelingRecordBloc, FeelingRecordState>(
+      builder: (context, state) {
+        return InkWell(
+          onTap: () {
+            // TODO: this is will handel the selection data
+            bloc.add(SelectEmotionEvent(content));
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: bloc.selectedEmotion == content ? borderColor : color,
+              border: Border.all(color: borderColor, width: borderWidth!),
+            ),
+            child: Text(
+              content,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        );
       },
-      child: BlocBuilder<FeelingRecordBloc, FeelingRecordState>(
-        builder: (context, state) {
-          if (state is UpdateSelectedEmotionState) {
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: state.isEmotionSelected ? borderColor : color,
-                border: Border.all(color: borderColor, width: borderWidth!),
-              ),
-              child: Text(
-                content,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
-          } else {
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: color,
-                border: Border.all(color: borderColor, width: borderWidth!),
-              ),
-              child: Text(
-                content,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
-          }
-        },
-      ),
     );
   }
 }

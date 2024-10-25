@@ -29,3 +29,5 @@ class SelectEmotionEvent extends FeelingRecordEvent {
   String emotionType;
   SelectEmotionEvent(this.emotionType);
 }
+
+

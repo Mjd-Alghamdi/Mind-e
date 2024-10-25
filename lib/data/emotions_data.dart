@@ -28,6 +28,9 @@ class EmotionsData {
         selectedEmotion[emotion] = false;
       }
     });
+    print("===================\n");
+    print(selectedEmotion);
+    print("===================\n");
   }
 
   void resetSelections() {

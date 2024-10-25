@@ -4,12 +4,12 @@ import 'package:mind_e/models/record_model.dart';
 class RecordData {
   // * The list of all registered feeling
   List<RecordModel> feelingRecordList = [
-    RecordModel(content: "first", emotionType: 'Happy'),
-    RecordModel(content: "ddd", emotionType: 'Sad'),
+    // RecordModel(content: "first", emotionType: 'Happy'),
+    // RecordModel(content: "ddd", emotionType: 'Sad'),
   ];
 
   // The most feeling
-  String mostFeeling = "";
+  String mostFeeling = "Happy mind, Happy life :)";
 
   // -- Add new feeling
   void addFeelingRecord({
@@ -56,30 +56,43 @@ class RecordData {
       switch (element.emotionType) {
         case "Happy":
           happyCounter++;
+          print("Happy part: $happyCounter");
           break;
 
         case "Calm":
           calmCounter++;
+          print("Calm part: $calmCounter");
+
           break;
 
         case "Sad":
           sadCounter++;
+          print("Sad part: $sadCounter");
+
           break;
 
         case "Anxious":
           anxiousCounter++;
+          print("Anxious part: $anxiousCounter");
+
           break;
       }
     }
 
     // Compare the counters
-    if (happyCounter >= calmCounter) {
+    if (happyCounter > calmCounter) {
+      print("Happy >");
       mostFeeling = emotionNote.happyNote;
-    } else if (sadCounter >= calmCounter) {
+    } else if (sadCounter > happyCounter) {
+      print("Sad >");
       mostFeeling = emotionNote.sadNote;
-    } else if (anxiousCounter >= sadCounter) {
+    } else if (anxiousCounter > sadCounter) {
+      print("Anxious >");
+
       mostFeeling = emotionNote.anxiousNote;
     } else {
+      print("Calm >");
+
       mostFeeling = emotionNote.calmNote;
     }
   }
