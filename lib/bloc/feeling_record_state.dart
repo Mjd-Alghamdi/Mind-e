@@ -17,3 +17,10 @@ class UpdateSelectedEmotionState extends FeelingRecordState {
   bool isEmotionSelected;
   UpdateSelectedEmotionState({required this.isEmotionSelected});
 }
+
+//-- App state
+// ignore: must_be_immutable
+class ErrorState extends FeelingRecordState {
+  String errorMsg;
+  ErrorState(this.errorMsg);
+}

@@ -10,20 +10,6 @@ class EmotionsData {
     "Sad": false,
   };
 
-  void updateSelectedEmotion({required String selection}) {
-    print("Entereddddddd");
-    selectedEmotion.keys.forEach((emotion) {
-      if (selection == emotion) {
-        selectedEmotion[emotion] = true;
-     
-      }
-      else{
-          selectedEmotion[emotion] = false;
-      }
-    });
-    print(selectedEmotion);
-  }
-
   // Awareness note
   String happyNote =
       "It seems like you've been feeling happy a lot lately! Keep enjoying the positive moment.";
@@ -33,4 +19,18 @@ class EmotionsData {
       "You've been feeling anxious frequently. It's important to take care of yourself.";
   String sadNote =
       "Sadness has been showing up a lot for you. Remember, it's okay to seek support.";
+
+  void updateSelectedEmotion({required String selection}) {
+    selectedEmotion.keys.forEach((emotion) {
+      if (selection == emotion) {
+        selectedEmotion[emotion] = true;
+      } else {
+        selectedEmotion[emotion] = false;
+      }
+    });
+  }
+
+  void resetSelections() {
+    selectedEmotion.keys.forEach((emotion) => selectedEmotion[emotion] = false);
+  }
 }

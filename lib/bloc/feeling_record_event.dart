@@ -9,10 +9,8 @@ class DisplayFeelingListEvent extends FeelingRecordEvent {}
 // ignore: must_be_immutable
 class AddNewFeelingEvent extends FeelingRecordEvent {
   String content;
-  String emotionType;
   AddNewFeelingEvent({
     required this.content,
-    required this.emotionType,
   });
 }
 
@@ -25,7 +23,7 @@ class RemoveFeelingRecordEvent extends FeelingRecordEvent {
 
 //--- Emotions Events
 
-//-- Selecting emotion event 
+//-- Selecting emotion event
 // ignore: must_be_immutable
 class SelectEmotionEvent extends FeelingRecordEvent {
   String emotionType;

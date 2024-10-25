@@ -11,7 +11,7 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
   // -- Data instance to be used
   final RecordData recordData = RecordData();
   final EmotionsData emotionData = EmotionsData();
-  late String selectedEmotion;
+   String selectedEmotion = "";
 
   FeelingRecordBloc() : super(FeelingRecordInitial()) {
     on<FeelingRecordEvent>((event, emit) {});
@@ -24,16 +24,25 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
     // -- Add new feeling Event
     on<AddNewFeelingEvent>((event, emit) {
       //-- Emotion selection
-      // TODO: Handel the emoty fields
 
-      // Adding
-      recordData.addFeelingRecord(
-        feelingContent: event.content,
-        emotion: selectedEmotion,
-        //event.emotionType,
-      );
-      selectedEmotion = "";
-      emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
+      if (event.content.trim().isEmpty) {
+        emit(ErrorState("You must to write a content!"));
+        emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
+      } else if (selectedEmotion.isEmpty) {
+        emit(ErrorState("Please choose how do you feel?"));
+        emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
+      } else {
+        // Adding
+        recordData.addFeelingRecord(
+          feelingContent: event.content,
+          emotion: selectedEmotion,
+        );
+
+        // -- Reset sections ---
+        selectedEmotion = "";
+        emotionData.resetSelections();
+        emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
+      }
     });
 
     // -- Remove a specific feeling Event
