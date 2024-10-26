@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_e/bloc/feeling_record_bloc.dart';
 import 'package:mind_e/views/home_view.dart';
+import 'package:mind_e/views/welcome_view.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,7 +17,7 @@ class MainApp extends StatelessWidget {
       create: (context) => FeelingRecordBloc(),
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomeView(),
+        home: WelcomeView(),
       ),
     );
   }

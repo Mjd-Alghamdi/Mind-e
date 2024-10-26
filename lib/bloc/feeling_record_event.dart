@@ -30,4 +30,9 @@ class SelectEmotionEvent extends FeelingRecordEvent {
   SelectEmotionEvent(this.emotionType);
 }
 
-
+//-- Take username event
+// ignore: must_be_immutable
+class TakeUserNameEvent extends FeelingRecordEvent {
+  String username;
+  TakeUserNameEvent(this.username);
+}

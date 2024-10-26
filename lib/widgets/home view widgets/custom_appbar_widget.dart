@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_e/bloc/feeling_record_bloc.dart';
 import 'package:mind_e/constants/color.dart';
 import 'package:mind_e/constants/spaces.dart';
-
 
 class CustomAppBarWidget extends StatelessWidget {
   const CustomAppBarWidget({
@@ -10,9 +11,10 @@ class CustomAppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    final bloc = context.read<FeelingRecordBloc>();
+    return Row(
       children: [
-        CircleAvatar(
+        const CircleAvatar(
           radius: 25,
           backgroundColor: greyBlackColor,
           child: Icon(
@@ -24,7 +26,7 @@ class CustomAppBarWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Welcome agin",
               style: TextStyle(
                 color: greyColor,
@@ -32,12 +34,13 @@ class CustomAppBarWidget extends StatelessWidget {
               ),
             ),
             Text(
-              "Sara",
-              style: TextStyle(
+              bloc.userData.userName,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
+          
           ],
         ),
       ],
