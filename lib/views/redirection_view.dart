@@ -13,12 +13,11 @@ class RedirectionView extends StatelessWidget {
 
     return BlocBuilder<FeelingRecordBloc, FeelingRecordState>(
       builder: (context, state) {
-
-         if (bloc.userData.userName.isNotEmpty) {
-            return const HomeView();
-          } else {
-            return const WelcomeView();
-          }
+        if (bloc.userData.userName.isNotEmpty) {
+          return const HomeView();
+        } else {
+          return const WelcomeView();
+        }
       },
     );
   }

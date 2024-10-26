@@ -25,10 +25,6 @@ class ErrorState extends FeelingRecordState {
   ErrorState(this.errorMsg);
 }
 
-// -- Loading state 
+// -- Redirect page
 // ignore: must_be_immutable
-class RedirectViewState extends FeelingRecordState {
- 
-}
-
-
+class RedirectViewState extends FeelingRecordState {}
