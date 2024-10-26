@@ -5,7 +5,7 @@ import 'package:mind_e/constants/color.dart';
 import 'package:mind_e/constants/spaces.dart';
 import 'package:mind_e/models/record_model.dart';
 import 'package:mind_e/widgets/buttons/custom_button.dart';
-import 'package:mind_e/widgets/home%20view%20widgets/small_card_info_widget.dart';
+import 'package:mind_e/widgets/small_card_info_widget.dart';
 
 class ViewFeelingPopupWidget extends StatelessWidget {
   const ViewFeelingPopupWidget({super.key, required this.feelingRecord});

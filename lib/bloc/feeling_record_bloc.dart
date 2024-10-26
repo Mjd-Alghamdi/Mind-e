@@ -5,7 +5,6 @@ import 'package:mind_e/data/emotions_data.dart';
 import 'package:mind_e/data/record_data.dart';
 import 'package:mind_e/data/user_data.dart';
 import 'package:mind_e/models/record_model.dart';
-
 part 'feeling_record_event.dart';
 part 'feeling_record_state.dart';
 
@@ -82,12 +81,24 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
 
     // --- user name event
     on<TakeUserNameEvent>(
-      (event, emit) {
+      (event, emit) async {
         if (event.username.trim().isEmpty) {
           emit(ErrorState("You must enter a name"));
         } else {
           userData.userName = event.username;
+          await userData.saveUser(username: event.username);
         }
+      },
+    );
+
+    //-- Retrieve the username from local storage
+    on<GetUsernameEvent>(
+      (event, emit) async {
+        print("Enters user getting");
+        await userData.getUser();
+        print("User name is ${userData.userName}");
+        print("Is there a user? ${userData.userName.isNotEmpty}");
+        emit(RedirectViewState());
       },
     );
   }

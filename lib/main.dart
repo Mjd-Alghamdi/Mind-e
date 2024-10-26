@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:mind_e/bloc/feeling_record_bloc.dart';
-import 'package:mind_e/views/home_view.dart';
-import 'package:mind_e/views/welcome_view.dart';
+import 'package:mind_e/views/redirection_view.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   runApp(const MainApp());
 }
 
@@ -14,10 +16,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FeelingRecordBloc(),
+      create: (context) => FeelingRecordBloc()..add(GetUsernameEvent()),
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: WelcomeView(),
+        home: RedirectionView(),
       ),
     );
   }

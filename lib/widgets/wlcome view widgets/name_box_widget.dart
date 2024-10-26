@@ -71,6 +71,7 @@ class _NameBoxWidgetState extends State<NameBoxWidget> {
               onTap: () {
                 bloc.add(TakeUserNameEvent(nameController.text));
                 if (nameController.text.trim().isNotEmpty) {
+                  // bloc.userData.saveUser(username: nameController.text);
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(

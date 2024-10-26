@@ -36,3 +36,6 @@ class TakeUserNameEvent extends FeelingRecordEvent {
   String username;
   TakeUserNameEvent(this.username);
 }
+
+//-- Retrieve user name event
+class GetUsernameEvent extends FeelingRecordEvent {}

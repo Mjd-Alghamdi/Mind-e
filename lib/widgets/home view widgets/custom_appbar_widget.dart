@@ -40,7 +40,6 @@ class CustomAppBarWidget extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-          
           ],
         ),
       ],

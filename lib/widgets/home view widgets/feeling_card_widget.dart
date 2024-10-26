@@ -4,7 +4,7 @@ import 'package:mind_e/constants/spaces.dart';
 import 'package:mind_e/models/record_model.dart';
 import 'package:mind_e/widgets/popups/view_feeling_popup_widget.dart';
 
-import 'small_card_info_widget.dart';
+import '../small_card_info_widget.dart';
 
 class FeelingCardWidget extends StatelessWidget {
   const FeelingCardWidget({
