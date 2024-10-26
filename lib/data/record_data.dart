@@ -3,10 +3,7 @@ import 'package:mind_e/models/record_model.dart';
 
 class RecordData {
   // * The list of all registered feeling
-  List<RecordModel> feelingRecordList = [
-    // RecordModel(content: "first", emotionType: 'Happy'),
-    // RecordModel(content: "ddd", emotionType: 'Sad'),
-  ];
+  List<RecordModel> feelingRecordList = [];
 
   // The most feeling
   String mostFeeling = "Happy mind, Happy life :)";
@@ -29,14 +26,6 @@ class RecordData {
   void removeFeelingRecord({required RecordModel record}) {
     // -- Remove the entered feeling into the list
     print("Key from function ${record.id}");
-    // feelingRecordList.removeWhere(
-    //   (feelingRecord) {
-    //     print(feelingRecord.content == record.content);
-    //     // ! There is a problem with the id even if it is matched it did'n deleted
-    //     // return feelingRecord.id == record.id;
-    //     return feelingRecord.content == record.content; // ! just for test
-    //   },
-    // );
     feelingRecordList.removeWhere(
       (feelingRecord) => feelingRecord.id == record.id,
     );
@@ -47,53 +36,36 @@ class RecordData {
   void getMostFeelingAdvice() {
     // -- Get the note
     final emotionNote = EmotionsData();
-    int sadCounter = 0;
-    int calmCounter = 0;
-    int anxiousCounter = 0;
-    int happyCounter = 0;
 
-    for (var element in feelingRecordList) {
-      switch (element.emotionType) {
-        case "Happy":
-          happyCounter++;
-          print("Happy part: $happyCounter");
-          break;
+    Map mostFeelingCounter = {
+      "Happy": 0,
+      "Calm": 0,
+      "Sad": 0,
+      "Anxious": 0,
+    };
 
-        case "Calm":
-          calmCounter++;
-          print("Calm part: $calmCounter");
-
-          break;
-
-        case "Sad":
-          sadCounter++;
-          print("Sad part: $sadCounter");
-
-          break;
-
-        case "Anxious":
-          anxiousCounter++;
-          print("Anxious part: $anxiousCounter");
-
-          break;
-      }
+    for (var emotion in feelingRecordList) {
+      // update the number of feeling in the map
+      mostFeelingCounter[emotion.emotionType]++;
     }
 
-    // Compare the counters
-    if (happyCounter > calmCounter) {
-      print("Happy >");
-      mostFeeling = emotionNote.happyNote;
-    } else if (sadCounter > happyCounter) {
-      print("Sad >");
-      mostFeeling = emotionNote.sadNote;
-    } else if (anxiousCounter > sadCounter) {
-      print("Anxious >");
+    // Set the highest value as the first value on the map
+    // -- First Key
+    String highestFeeling = mostFeelingCounter.keys.first;
+    // -- It's value
+    int maxCounter = mostFeelingCounter.values.first;
 
-      mostFeeling = emotionNote.anxiousNote;
-    } else {
-      print("Calm >");
+    //-- Loop to check and update
+    mostFeelingCounter.forEach(
+      (key, value) {
+        if (maxCounter < value) {
+          maxCounter = value;
+          highestFeeling = key;
+        }
+      },
+    );
 
-      mostFeeling = emotionNote.calmNote;
-    }
+    //-- set the sentence
+    mostFeeling = emotionNote.awarenessNote[highestFeeling];
   }
 }

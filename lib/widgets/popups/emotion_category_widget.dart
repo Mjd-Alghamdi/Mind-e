@@ -11,41 +11,22 @@ class EmotionCategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<FeelingRecordBloc>();
     List<String> emotion = bloc.emotionData.emotionsList;
-    return BlocBuilder<FeelingRecordBloc, FeelingRecordState>(
-      builder: (context, state) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(emotion.length, (index) {
-            if (state is UpdateSelectedEmotionState) {
-              return SelectionWidget(
-                content: emotion[index],
-                color: whiteColor,
-                borderColor: emotion[index] == "Happy"
-                    ? lightPinkColor
-                    : emotion[index] == "Calm"
-                        ? tiffanyColor
-                        : emotion[index] == "Sad"
-                            ? greyColor
-                            : Colors.green,
-                borderWidth: 1,
-              );
-            } else {
-              return SelectionWidget(
-                content: emotion[index],
-                color: whiteColor,
-                borderColor: emotion[index] == "Happy"
-                    ? lightPinkColor
-                    : emotion[index] == "Calm"
-                        ? tiffanyColor
-                        : emotion[index] == "Sad"
-                            ? greyColor
-                            : Colors.green,
-                borderWidth: 1,
-              );
-            }
-          }),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: List.generate(emotion.length, (index) {
+        return SelectionWidget(
+          content: emotion[index],
+          color: whiteColor,
+          borderColor: emotion[index] == "Happy"
+              ? lightPinkColor
+              : emotion[index] == "Calm"
+                  ? tiffanyColor
+                  : emotion[index] == "Sad"
+                      ? greyColor
+                      : Colors.green,
+          borderWidth: 1,
         );
-      },
+      }),
     );
   }
 }
