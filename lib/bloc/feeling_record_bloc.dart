@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -7,6 +8,8 @@ import 'package:mind_e/data/user_data.dart';
 import 'package:mind_e/models/record_model.dart';
 part 'feeling_record_event.dart';
 part 'feeling_record_state.dart';
+part 'feeling_record_bloc_user.dart';
+part 'feeling_record_bloc_record.dart';
 
 class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
   // -- Data instance to be used
@@ -20,49 +23,22 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
     on<FeelingRecordEvent>((event, emit) {});
 
     // -- Displaying the List of recorder feelings event
-    on<DisplayFeelingListEvent>((event, emit) {
-      emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
-    });
+    on<DisplayFeelingListEvent>(displayRecord);
 
     // -- Add new feeling Event
-    on<AddNewFeelingEvent>((event, emit) {
-      //-- Emotion selection
-
-      if (event.content.trim().isEmpty) {
-        emit(ErrorState("You must write a content!"));
-        emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
-      } else if (selectedEmotion.isEmpty) {
-        emit(ErrorState("Please choose how do you feel?"));
-        emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
-      } else {
-        // Adding
-        recordData.addFeelingRecord(
-          feelingContent: event.content,
-          emotion: selectedEmotion,
-        );
-
-        //--- Calculate the feelings
-        recordData.getMostFeelingAdvice();
-
-        //- Update feeling record in storage
-        recordData.saveFeelingRecord();
-
-        // -- Reset sections ---
-        selectedEmotion = "";
-        emotionData.resetSelections();
-        emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
-      }
-    });
+    on<AddNewFeelingEvent>(addRecord);
 
     // -- Remove a specific feeling Event
-    on<RemoveFeelingRecordEvent>((event, emit) {
-      recordData.removeFeelingRecord(record: event.record);
-      //- Update feeling record in storage
-      recordData.saveFeelingRecord();
-      //--- Calculate the feelings
-      recordData.getMostFeelingAdvice();
-      emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
-    });
+    on<RemoveFeelingRecordEvent>(removeRecord);
+
+    // --- user name event
+    on<TakeUserNameEvent>(takeUsername);
+
+    //-- Retrieve the username from local storage
+    on<GetUsernameEvent>(getUsername);
+
+    // --- Retrieve the user feelings record
+    on<GetUserRecordEvent>(getUserRecord);
 
     //---- Emotions part
     // -- Select emotion for the feeling event
@@ -81,42 +57,6 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
         bool isSelected = emotionData.selectedEmotion[event.emotionType];
         print("IS EMOTION SELECTED????? $isSelected");
         UpdateSelectedEmotionState(isEmotionSelected: isSelected);
-      },
-    );
-
-    // --- user name event
-    on<TakeUserNameEvent>(
-      (event, emit) {
-        if (event.username.trim().isEmpty) {
-          emit(ErrorState("You must enter a name"));
-        } else {
-          userData.userName = event.username;
-          userData.saveUser(username: event.username);
-        }
-      },
-    );
-
-    //-- Retrieve the username from local storage
-    on<GetUsernameEvent>(
-      (event, emit) async {
-        print("Enters user getting");
-        await userData.getUser();
-        print("User name is ${userData.userName}");
-        print("Is there a user? ${userData.userName.isNotEmpty}");
-        emit(RedirectViewState());
-      },
-    );
-
-    // --- Retrieve the user feelings record
-    on<GetUserRecordEvent>(
-      (event, emit) async {
-        print("Enters record getting");
-        await recordData.getFeelingRecord();
-        if (recordData.feelingRecordList.isNotEmpty) {
-          //--- Calculate the feelings
-          recordData.getMostFeelingAdvice();
-        }
-        print("RECORD HERE ${recordData.feelingRecordList}");
       },
     );
   }
