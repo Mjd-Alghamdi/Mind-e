@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RecordModel {
-  late UniqueKey id;
-  final String content;
-  final String emotionType;
+  late String id;
+  late String content;
+  late String emotionType;
   late DateTime crateAt;
 
   RecordModel({
@@ -11,8 +11,36 @@ class RecordModel {
     required this.emotionType,
   }) {
     // -- Random id
-    // TODO: Change this later "it will be generated randomly"
-    id = UniqueKey();
+    id = UniqueKey().toString();
     crateAt = DateTime.now();
   }
+
+  //-- From json to object template
+  RecordModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    content = json['content'];
+    emotionType = json['emotionType'];
+    crateAt = DateTime.parse(json['crateAt']);
+  }
+
+  //-- To json
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "content": content,
+      "emotionType": emotionType,
+      "crateAt": crateAt.toString(),
+    };
+  }
 }
+
+/**
+ * Json Data Example :
+ 
+ {
+  "id": "#sss",
+  "content": "this is a feeling",
+  "emotionType": "happy",
+  "crateAt": "2-2-24",
+ }
+ */

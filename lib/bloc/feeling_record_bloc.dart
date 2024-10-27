@@ -44,6 +44,9 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
         //--- Calculate the feelings
         recordData.getMostFeelingAdvice();
 
+        //- Update feeling record in storage
+        recordData.saveFeelingRecord();
+
         // -- Reset sections ---
         selectedEmotion = "";
         emotionData.resetSelections();
@@ -54,6 +57,8 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
     // -- Remove a specific feeling Event
     on<RemoveFeelingRecordEvent>((event, emit) {
       recordData.removeFeelingRecord(record: event.record);
+      //- Update feeling record in storage
+      recordData.saveFeelingRecord();
       //--- Calculate the feelings
       recordData.getMostFeelingAdvice();
       emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
@@ -81,12 +86,12 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
 
     // --- user name event
     on<TakeUserNameEvent>(
-      (event, emit) async {
+      (event, emit) {
         if (event.username.trim().isEmpty) {
           emit(ErrorState("You must enter a name"));
         } else {
           userData.userName = event.username;
-          await userData.saveUser(username: event.username);
+          userData.saveUser(username: event.username);
         }
       },
     );
@@ -99,6 +104,19 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
         print("User name is ${userData.userName}");
         print("Is there a user? ${userData.userName.isNotEmpty}");
         emit(RedirectViewState());
+      },
+    );
+
+    // --- Retrieve the user feelings record
+    on<GetUserRecordEvent>(
+      (event, emit) async {
+        print("Enters record getting");
+        await recordData.getFeelingRecord();
+        if (recordData.feelingRecordList.isNotEmpty) {
+          //--- Calculate the feelings
+          recordData.getMostFeelingAdvice();
+        }
+        print("RECORD HERE ${recordData.feelingRecordList}");
       },
     );
   }

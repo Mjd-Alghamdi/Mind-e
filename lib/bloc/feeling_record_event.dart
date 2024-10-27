@@ -39,3 +39,6 @@ class TakeUserNameEvent extends FeelingRecordEvent {
 
 //-- Retrieve user name event
 class GetUsernameEvent extends FeelingRecordEvent {}
+
+//  Retrieve user name event
+class GetUserRecordEvent extends FeelingRecordEvent {}

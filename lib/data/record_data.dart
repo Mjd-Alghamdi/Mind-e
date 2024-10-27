@@ -1,3 +1,4 @@
+import 'package:get_storage/get_storage.dart';
 import 'package:mind_e/data/emotions_data.dart';
 import 'package:mind_e/models/record_model.dart';
 
@@ -7,6 +8,9 @@ class RecordData {
 
   // Initial most feeling text
   String mostFeeling = "Happy mind, Happy life :)";
+
+  // -- initialize the box instance to store data
+  final box = GetStorage();
 
   // -- Add new feeling
   void addFeelingRecord({
@@ -67,5 +71,38 @@ class RecordData {
 
     //-- set the suitable sentence
     mostFeeling = emotionNote.awarenessNote[highestFeeling];
+  }
+
+  // -- User feelings
+  // 1- Save it
+  void saveFeelingRecord() {
+    try {
+      // Map encodedList = userFeelings.forEach((element) => element.toJson());
+      List jsonList = [];
+      for (var element in feelingRecordList) {
+        print("=====Entered here!");
+        jsonList.add(element.toJson());
+      }
+      print("the json list $jsonList");
+      print("=====Finish here!");
+
+      box.write("record", jsonList);
+    } catch (e) {
+      print("No record or Something went wrong $e");
+    }
+  }
+
+  // 2- Retrieve  it
+  Future<void> getFeelingRecord() async {
+    // box.erase(); // in case to reset user record
+    List temp = [];
+    try {
+      temp = await box.read("record");
+      for (var element in temp) {
+        feelingRecordList.add(RecordModel.fromJson(element));
+      }
+    } catch (e) {
+      print("No record or Something went wrong $e");
+    }
   }
 }

@@ -16,7 +16,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FeelingRecordBloc()..add(GetUsernameEvent()),
+      create: (context) => FeelingRecordBloc()
+        ..add(GetUsernameEvent())
+        ..add(GetUserRecordEvent()),
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: RedirectionView(),

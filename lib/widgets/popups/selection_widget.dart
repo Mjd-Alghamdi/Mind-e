@@ -21,14 +21,14 @@ class SelectionWidget extends StatelessWidget {
     return BlocBuilder<FeelingRecordBloc, FeelingRecordState>(
       builder: (context, state) {
         //-- Printed here without the middle one
-        print("------- Here before if -------");
-        print(bloc.selectedEmotion);
-        print("--------------\n");
+        // print("------- Here before if -------");
+        // print(bloc.selectedEmotion);
+        // print("--------------\n");
         if (state is UpdateSelectedEmotionState) {
           // -- Not printed at all
-          print("------- Here inside if -------");
-          print(bloc.selectedEmotion);
-          print("--------------\n");
+          // print("------- Here inside if -------");
+          // print(bloc.selectedEmotion);
+          // print("--------------\n");
           return InkWell(
             onTap: () {
               bloc.add(SelectEmotionEvent(content));
@@ -49,7 +49,7 @@ class SelectionWidget extends StatelessWidget {
             ),
           );
         } else {
-          print("------- I'm at else statement :) -------\n");
+          // print("------- I'm at else statement :) -------\n");
 
           return InkWell(
             onTap: () {

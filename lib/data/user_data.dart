@@ -7,17 +7,19 @@ class UserData {
   final box = GetStorage();
 
   //-- Save user name
-  Future<void> saveUser({required String username}) async {
-    await box.write("username", username);
+  void saveUser({required String username}) {
+    box.write("username", username);
   }
 
   //-- Retrieve the username from the box
   Future<void> getUser() async {
-    // box.erase(); // in case to reset user name 
+    // box.erase(); // in case to reset user name
     try {
       userName = await box.read("username");
     } catch (e) {
       print("Null as initial value or Something went wrong $e");
     }
   }
+
+  
 }
