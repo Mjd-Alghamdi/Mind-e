@@ -83,7 +83,7 @@ class _AddFeelingPopupWidgetState extends State<AddFeelingPopupWidget> {
                     ));
 
                     // -- Pop up the view
-                    feelingContentController.text.isNotEmpty &&
+                    feelingContentController.text.trim().isNotEmpty &&
                             bloc.selectedEmotion.isNotEmpty
                         ? Navigator.pop(context)
                         : null;
