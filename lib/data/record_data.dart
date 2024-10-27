@@ -5,7 +5,7 @@ class RecordData {
   // * The list of all registered feeling
   List<RecordModel> feelingRecordList = [];
 
-  // The most feeling
+  // Initial most feeling text
   String mostFeeling = "Happy mind, Happy life :)";
 
   // -- Add new feeling
@@ -65,7 +65,7 @@ class RecordData {
       },
     );
 
-    //-- set the sentence
+    //-- set the suitable sentence
     mostFeeling = emotionNote.awarenessNote[highestFeeling];
   }
 }

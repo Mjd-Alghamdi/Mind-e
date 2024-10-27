@@ -13,11 +13,11 @@ class UserData {
 
   //-- Retrieve the username from the box
   Future<void> getUser() async {
-    // box.erase();
+    // box.erase(); // in case to reset user name 
     try {
       userName = await box.read("username");
     } catch (e) {
-      print("Something went wrong $e");
+      print("Null as initial value or Something went wrong $e");
     }
   }
 }

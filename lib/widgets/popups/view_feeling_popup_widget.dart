@@ -36,7 +36,7 @@ class ViewFeelingPopupWidget extends StatelessWidget {
                   SmallCardInfoWidget(
                     content:
                         "${DateTime.now().day} - ${DateTime.now().month} - ${DateTime.now().year}",
-                    color: lightTiffanyColor,
+                    color: limColor,
                   ),
                   SmallCardInfoWidget(
                     content: feelingRecord.emotionType,

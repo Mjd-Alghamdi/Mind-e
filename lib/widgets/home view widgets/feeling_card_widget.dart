@@ -3,7 +3,6 @@ import 'package:mind_e/constants/color.dart';
 import 'package:mind_e/constants/spaces.dart';
 import 'package:mind_e/models/record_model.dart';
 import 'package:mind_e/widgets/popups/view_feeling_popup_widget.dart';
-
 import '../small_card_info_widget.dart';
 
 class FeelingCardWidget extends StatelessWidget {
@@ -62,7 +61,7 @@ class FeelingCardWidget extends StatelessWidget {
                 SmallCardInfoWidget(
                   content:
                       "${feelingRecord.crateAt.day} - ${feelingRecord.crateAt.month} - ${feelingRecord.crateAt.year}",
-                  color: lightTiffanyColor,
+                  color: limColor,
                 ),
                 kH12,
                 SmallCardInfoWidget(
