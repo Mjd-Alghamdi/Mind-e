@@ -18,7 +18,7 @@ class CustomPlaceholder extends StatelessWidget {
             ),
             kV16,
             Text(
-              "No Feeling Recorded yet ! :)",
+              "No Feeling Record ! :)",
               style: TextStyle(
                 fontSize: 16,
                 color: greyColor,

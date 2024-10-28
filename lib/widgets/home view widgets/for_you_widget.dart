@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_e/bloc/feeling_record_bloc.dart';
 import 'package:mind_e/constants/color.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ForYouWidget extends StatelessWidget {
   const ForYouWidget({super.key});
@@ -22,10 +23,15 @@ class ForYouWidget extends StatelessWidget {
               topLeft: Radius.circular(10),
             ),
           ),
-          child: const Text(
-            "For you",
-            textAlign: TextAlign.center,
-            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+          child: Shimmer.fromColors(
+            baseColor: greyColor,
+            highlightColor: whiteColor,
+            period: const Duration(milliseconds: 1500),
+            child: const Text(
+              "For you",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
         BlocBuilder<FeelingRecordBloc, FeelingRecordState>(

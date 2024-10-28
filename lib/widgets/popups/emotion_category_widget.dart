@@ -11,22 +11,26 @@ class EmotionCategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<FeelingRecordBloc>();
     List<String> emotion = bloc.emotionData.emotionsList;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(emotion.length, (index) {
-        return SelectionWidget(
-          content: emotion[index],
-          color: whiteColor,
-          borderColor: emotion[index] == "Happy"
-              ? lightPinkColor
-              : emotion[index] == "Calm"
-                  ? tiffanyColor
-                  : emotion[index] == "Sad"
-                      ? greyColor
-                      : Colors.green,
-          borderWidth: 1,
+    return BlocBuilder<FeelingRecordBloc, FeelingRecordState>(
+      builder: (context, state) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: List.generate(emotion.length, (index) {
+            return SelectionWidget(
+              content: emotion[index],
+              color: whiteColor,
+              borderColor: emotion[index] == "Happy"
+                  ? lightPinkColor
+                  : emotion[index] == "Calm"
+                      ? tiffanyColor
+                      : emotion[index] == "Sad"
+                          ? greyColor
+                          : Colors.green,
+              borderWidth: 1,
+            );
+          }),
         );
-      }),
+      },
     );
   }
 }
