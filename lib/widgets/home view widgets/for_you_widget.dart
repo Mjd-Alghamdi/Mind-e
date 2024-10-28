@@ -26,7 +26,7 @@ class ForYouWidget extends StatelessWidget {
           child: Shimmer.fromColors(
             baseColor: greyColor,
             highlightColor: whiteColor,
-            period: const Duration(milliseconds: 1500),
+            period: const Duration(milliseconds: 1300),
             child: const Text(
               "For you",
               textAlign: TextAlign.center,
