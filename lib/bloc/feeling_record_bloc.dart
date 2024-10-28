@@ -40,6 +40,9 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
     // --- Retrieve the user feelings record
     on<GetUserRecordEvent>(getUserRecord);
 
+    //-- Filter record
+    on<FilterRecordEvent>(filterRecord); // TODO: ---------
+
     //---- Emotions part
     // -- Select emotion for the feeling event
     on<SelectEmotionEvent>(

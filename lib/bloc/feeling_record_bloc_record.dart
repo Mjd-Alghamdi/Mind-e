@@ -1,7 +1,6 @@
 part of 'feeling_record_bloc.dart';
 
 extension RecordFunctions on FeelingRecordBloc {
-
   // -- Display Record
   FutureOr<void> displayRecord(event, emit) {
     emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
@@ -43,5 +42,15 @@ extension RecordFunctions on FeelingRecordBloc {
     //--- Calculate the feelings
     recordData.getMostFeelingAdvice();
     emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
+  }
+
+  //-- Filter record
+  FutureOr<void> filterRecord(event, emit) {
+  List<RecordModel> searchedList = recordData.filterRecords(selectedEmotion: event.selection);
+    emit(
+      ShowFeelingListState(
+        recordList: searchedList,
+      ),
+    );
   }
 }

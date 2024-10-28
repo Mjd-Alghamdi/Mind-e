@@ -5,6 +5,7 @@ import 'package:mind_e/models/record_model.dart';
 class RecordData {
   // * The list of all registered feeling
   List<RecordModel> feelingRecordList = [];
+  List<RecordModel> searchedFeelingRecordList = [];
 
   // Initial most feeling text
   String mostFeeling = "Happy mind, Happy life :)";
@@ -73,11 +74,27 @@ class RecordData {
     mostFeeling = emotionNote.awarenessNote[highestFeeling];
   }
 
+  //-- Filter records (Sad, Happy, Calm, Anxious)
+  List<RecordModel> filterRecords({required String selectedEmotion}) {
+    if (selectedEmotion == "All") {
+      print("HERE");
+      return feelingRecordList;
+    } else {
+      searchedFeelingRecordList.clear();
+
+      for (var element in feelingRecordList) {
+        if (element.emotionType == selectedEmotion) {
+          searchedFeelingRecordList.add(element);
+        }
+      }
+      return searchedFeelingRecordList;
+    }
+  }
+
   // -- User feelings
   // 1- Save it
   void saveFeelingRecord() {
     try {
-      // Map encodedList = userFeelings.forEach((element) => element.toJson());
       List jsonList = [];
       for (var element in feelingRecordList) {
         print("=====Entered here!");

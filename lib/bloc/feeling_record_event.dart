@@ -42,3 +42,10 @@ class GetUsernameEvent extends FeelingRecordEvent {}
 
 //  Retrieve user name event
 class GetUserRecordEvent extends FeelingRecordEvent {}
+
+//-- Filer record --
+// ignore: must_be_immutable
+class FilterRecordEvent extends FeelingRecordEvent {
+  String selection;
+  FilterRecordEvent(this.selection);
+}
