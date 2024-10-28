@@ -13,26 +13,39 @@ class EmotionOptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<FeelingRecordBloc>();
-    return InkWell(
-      onTap: () {
-        bloc.add(FilterRecordEvent(emotionType));
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        margin: const EdgeInsets.symmetric(horizontal: 5),
-        decoration: BoxDecoration(
-          color: emotionType != "All" ? greyBlackColor : tiffanyColor,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Text(
-          emotionType,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: emotionType != "All" ? whiteColor : greyBlackColor,
+    return BlocBuilder<FeelingRecordBloc, FeelingRecordState>(
+      builder: (context, state) {
+        return InkWell(
+          onTap: () {
+            bloc.add(FilterRecordEvent(emotionType));
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            margin: const EdgeInsets.symmetric(horizontal: 5),
+            decoration: BoxDecoration(
+              color: bloc.emotionData.selectedEmotion[emotionType]
+                  ? greyBlackColor
+                  : bloc.isInitial && emotionType == "All"
+                      ? greyBlackColor
+                      : tiffanyColor,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Text(
+              emotionType,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: bloc.emotionData.selectedEmotion[emotionType]
+                    ? whiteColor :
+                    bloc.isInitial && emotionType == "All"
+                        ? whiteColor
+                        : greyBlackColor
+                    ,
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

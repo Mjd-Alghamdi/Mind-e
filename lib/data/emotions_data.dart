@@ -4,6 +4,7 @@ class EmotionsData {
 
   //-- Which emotion selected ?
   Map selectedEmotion = {
+    "All" : false,
     "Happy": false,
     "Calm": false,
     "Anxious": false,

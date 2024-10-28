@@ -8,6 +8,8 @@ extension RecordFunctions on FeelingRecordBloc {
 
   // -- Add Record
   FutureOr<void> addRecord(event, emit) {
+    isInitial = true;
+    emotionData.resetSelections();
     if (event.content.trim().isEmpty) {
       emit(ErrorState("You must write a content!"));
       emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
@@ -46,7 +48,11 @@ extension RecordFunctions on FeelingRecordBloc {
 
   //-- Filter record
   FutureOr<void> filterRecord(event, emit) {
-  List<RecordModel> searchedList = recordData.filterRecords(selectedEmotion: event.selection);
+    emotionData.updateSelectedEmotion(selection: event.selection);
+    isInitial = false;
+    List<RecordModel> searchedList = recordData.filterRecords(
+      selectedEmotion: event.selection,
+    );
     emit(
       ShowFeelingListState(
         recordList: searchedList,

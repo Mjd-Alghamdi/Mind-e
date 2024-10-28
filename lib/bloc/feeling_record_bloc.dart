@@ -17,6 +17,9 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
   final EmotionsData emotionData = EmotionsData();
   final UserData userData = UserData();
 
+  //-- Crete an instance for filter selection
+  bool isInitial = true;
+
   String selectedEmotion = "";
 
   FeelingRecordBloc() : super(FeelingRecordInitial()) {

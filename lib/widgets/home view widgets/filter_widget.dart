@@ -13,11 +13,11 @@ class FilterWidget extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
-          EmotionOptionWidget(emotionType: 'All'),
-          EmotionOptionWidget(emotionType: 'Happy'),
-          EmotionOptionWidget(emotionType: 'Sad'),
-          EmotionOptionWidget(emotionType: 'Calm'),
-          EmotionOptionWidget(emotionType: 'Anxious'),
+          EmotionOptionWidget(emotionType: "All"),
+          EmotionOptionWidget(emotionType: "Happy"),
+          EmotionOptionWidget(emotionType: "Sad"),
+          EmotionOptionWidget(emotionType: "Calm"),
+          EmotionOptionWidget(emotionType: "Anxious"),
         ],
       ),
     );
