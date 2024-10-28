@@ -43,6 +43,8 @@ extension RecordFunctions on FeelingRecordBloc {
     recordData.saveFeelingRecord();
     //--- Calculate the feelings
     recordData.getMostFeelingAdvice();
+    isInitial = true;
+    emotionData.resetSelections();
     emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
   }
 
