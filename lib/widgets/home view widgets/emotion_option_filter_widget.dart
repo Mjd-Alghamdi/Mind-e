@@ -23,7 +23,7 @@ class EmotionOptionWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             margin: const EdgeInsets.symmetric(horizontal: 5),
             decoration: BoxDecoration(
-              color: bloc.emotionData.selectedEmotion[emotionType]
+              color: bloc.emotionData.filterSelection[emotionType]
                   ? greyBlackColor
                   : bloc.isInitial && emotionType == "All"
                       ? greyBlackColor
@@ -35,12 +35,11 @@ class EmotionOptionWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: bloc.emotionData.selectedEmotion[emotionType]
-                    ? whiteColor :
-                    bloc.isInitial && emotionType == "All"
+                color: bloc.emotionData.filterSelection[emotionType]
+                    ? whiteColor
+                    : bloc.isInitial && emotionType == "All"
                         ? whiteColor
-                        : greyBlackColor
-                    ,
+                        : greyBlackColor,
               ),
             ),
           ),

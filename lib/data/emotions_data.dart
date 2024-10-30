@@ -2,9 +2,17 @@ class EmotionsData {
   // -- List of main emotions
   List<String> emotionsList = ["Happy", "Calm", "Anxious", "Sad"];
 
-  //-- Which emotion selected ?
+  //-- Which emotion selected ? in add popup
   Map selectedEmotion = {
-    "All" : false,
+    "Happy": false,
+    "Calm": false,
+    "Anxious": false,
+    "Sad": false,
+  };
+
+  //-- Which emotion selected to be filtered? in home view
+  Map filterSelection = {
+    "All": false,
     "Happy": false,
     "Calm": false,
     "Anxious": false,
@@ -23,12 +31,13 @@ class EmotionsData {
         "Sadness has been showing up a lot for you. Remember, it's okay to seek support.",
   };
 
-  void updateSelectedEmotion({required String selection}) {
-    selectedEmotion.keys.forEach((emotion) {
+  void updateSelectedEmotion(
+      {required String selection, required Map selectionMap}) {
+    selectionMap.keys.forEach((emotion) {
       if (selection == emotion) {
-        selectedEmotion[emotion] = true;
+        selectionMap[emotion] = true;
       } else {
-        selectedEmotion[emotion] = false;
+        selectionMap[emotion] = false;
       }
     });
     print("===================\n");
@@ -38,5 +47,6 @@ class EmotionsData {
 
   void resetSelections() {
     selectedEmotion.keys.forEach((emotion) => selectedEmotion[emotion] = false);
+    filterSelection.keys.forEach((emotion) => filterSelection[emotion] = false);
   }
 }

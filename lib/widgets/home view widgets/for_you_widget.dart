@@ -51,7 +51,9 @@ class ForYouWidget extends StatelessWidget {
                 child: Text(
                   bloc.recordData.mostFeeling,
                   style: const TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.w600),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               );
             } else {

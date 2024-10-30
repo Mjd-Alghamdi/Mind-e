@@ -49,3 +49,5 @@ class FilterRecordEvent extends FeelingRecordEvent {
   String selection;
   FilterRecordEvent(this.selection);
 }
+
+class ClearAllEmotionSelectionEvent extends FeelingRecordEvent {}

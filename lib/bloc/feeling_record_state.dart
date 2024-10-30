@@ -14,8 +14,8 @@ class ShowFeelingListState extends FeelingRecordState {
 // --- Emotion Selection
 // ignore: must_be_immutable
 class UpdateSelectedEmotionState extends FeelingRecordState {
-  bool isEmotionSelected;
-  UpdateSelectedEmotionState({required this.isEmotionSelected});
+  // bool isEmotionSelected;
+  // UpdateSelectedEmotionState({required this.isEmotionSelected});
 }
 
 //-- App state
