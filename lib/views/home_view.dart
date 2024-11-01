@@ -6,8 +6,7 @@ import 'package:mind_e/bloc/feeling_record_bloc.dart';
 import 'package:mind_e/constants/color.dart';
 import 'package:mind_e/constants/spaces.dart';
 import 'package:mind_e/widgets/home%20view%20widgets/custom_appbar_widget.dart';
-import 'package:mind_e/widgets/home%20view%20widgets/custom_placeholder.dart';
-import 'package:mind_e/widgets/home%20view%20widgets/feeling_card_widget.dart';
+import 'package:mind_e/widgets/home%20view%20widgets/feeling_list_widget.dart';
 import 'package:mind_e/widgets/home%20view%20widgets/filter_widget.dart';
 import 'package:mind_e/widgets/home%20view%20widgets/floating_action_button_widget.dart';
 import 'package:mind_e/widgets/home%20view%20widgets/for_you_widget.dart';
@@ -44,35 +43,15 @@ class HomeView extends StatelessWidget {
               child: BlocBuilder<FeelingRecordBloc, FeelingRecordState>(
                 builder: (context, state) {
                   if (state is ShowFeelingListState) {
-                    return state.recordList.isEmpty
-                        ? const CustomPlaceholder()
-                        : ListView.builder(
-                            itemCount: state.recordList.length,
-                            padding: EdgeInsets.zero,
-                            itemBuilder: (BuildContext context, int index) {
-                              return FeelingCardWidget(
-                                feelingRecord: state.recordList[index],
-                              );
-                            },
-                          );
-                  } else if(state is UpdateSelectedEmotionState)
-                     return bloc.recordData.feelingRecordList.isEmpty
-                        ? const CustomPlaceholder()
-                        : ListView.builder(
-                            itemCount: bloc.recordData.feelingRecordList.length,
-                            padding: EdgeInsets.zero,
-                            itemBuilder: (BuildContext context, int index) {
-                              return FeelingCardWidget(
-                                feelingRecord: bloc.recordData.feelingRecordList[index],
-                              );
-                            },
-                          );
-                   {
-                    return Container(
-                      color: lightLimColor,
-                      child: const Text("Something went wrong!"),
-                    );
+                    return FeelingListWidget(feelingList: state.recordList);
+                  } else if (state is UpdateSelectedEmotionState) {
+                    return FeelingListWidget(
+                        feelingList: bloc.recordData.feelingRecordList);
                   }
+                  return Container(
+                    color: lightLimColor,
+                    child: const Text("Something went wrong!"),
+                  );
                 },
               ),
             ),
