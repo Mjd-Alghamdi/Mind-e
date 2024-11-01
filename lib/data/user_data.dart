@@ -20,6 +20,4 @@ class UserData {
       print("Null as initial value or Something went wrong $e");
     }
   }
-
-  
 }

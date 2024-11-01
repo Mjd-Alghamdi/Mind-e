@@ -67,10 +67,7 @@ class FeelingRecordBloc extends Bloc<FeelingRecordEvent, FeelingRecordState> {
         bool isSelected = emotionData.selectedEmotion[event.emotionType];
         print("IS EMOTION SELECTED????? $isSelected");
         // TODO : HERE :)
-        // UpdateSelectedEmotionState(
-        //     // isEmotionSelected: isSelected,
-        //     );
-        emit(ShowFeelingListState(recordList: recordData.feelingRecordList));
+        emit(UpdateSelectedEmotionState());
       },
     );
   }

@@ -36,7 +36,7 @@ class ForYouWidget extends StatelessWidget {
         ),
         BlocBuilder<FeelingRecordBloc, FeelingRecordState>(
           builder: (context, state) {
-            if (state is ShowFeelingListState) {
+            if (state is ShowFeelingListState || state is UpdateSelectedEmotionState) {
               return Container(
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.all(30),

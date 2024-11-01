@@ -4,6 +4,8 @@ import 'package:mind_e/bloc/feeling_record_bloc.dart';
 import 'package:mind_e/constants/color.dart';
 import 'package:mind_e/widgets/popups/selection_widget.dart';
 
+
+// TODO : HERE 
 class EmotionCategoryWidget extends StatelessWidget {
   const EmotionCategoryWidget({super.key});
 

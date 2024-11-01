@@ -1,3 +1,5 @@
+// ignore_for_file: curly_braces_in_flow_control_structures
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_e/bloc/feeling_record_bloc.dart';
@@ -53,7 +55,19 @@ class HomeView extends StatelessWidget {
                               );
                             },
                           );
-                  } else {
+                  } else if(state is UpdateSelectedEmotionState)
+                     return bloc.recordData.feelingRecordList.isEmpty
+                        ? const CustomPlaceholder()
+                        : ListView.builder(
+                            itemCount: bloc.recordData.feelingRecordList.length,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (BuildContext context, int index) {
+                              return FeelingCardWidget(
+                                feelingRecord: bloc.recordData.feelingRecordList[index],
+                              );
+                            },
+                          );
+                   {
                     return Container(
                       color: lightLimColor,
                       child: const Text("Something went wrong!"),
